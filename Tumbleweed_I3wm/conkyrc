@@ -1,0 +1,74 @@
+conky.config = {
+		alignment 								= 'top_right',
+		background 								= true,
+		color2 										= '9a9b9c',
+		cpu_avg_samples 					= 2,
+		default_color 						= 'ddd',
+		double_buffer 						= true,
+		font 											= 'Zekton:size=8',
+		draw_shades 							= false,
+		gap_x 										= 25,
+		gap_y 										= 25,
+		minimum_width 						= 200,
+		maximum_width 						= 200,
+		no_buffers 								= true,
+		own_window 								= true,
+		own_window_type 					= 'override',
+		own_window_transparent 		= true,
+		update_interval 					= 1.0,
+		use_xft 									= true,
+}
+conky.text = [[
+${voffset 8}$color2${font Zekton:size=16}${time %A}$font\
+${voffset -8}$alignr$color${font Zekton:size=38}${time %e}$font
+$color${voffset -30}$color${font Zekton:size=18}${time %b}$font\
+${voffset -3} $color${font Zekton:size=20}${time %Y}$font$color2$hr
+#
+############ CPU ##################
+${voffset 0}${goto 0}${color red}CPU ${hr 1}${color}
+${voffset 0}${goto 10}Temp: ${acpitemp} C ${alignr}${freq} MHz
+${voffset 0}${goto 10} $cpu%   ${cpubar 8}
+#${voffset 0}${goto 10}CPU Temp: ${acpitemp} C
+#
+############ Ram ##################
+${voffset 2}${goto 0}${color red}RAM ${hr 1}${color}
+${offset 0}${goto 10}${color}$memperc%   ${membar 8}
+${offset 0}${goto 10}${color}USED${font Bitstream Vera Sans:bold:size=8}$alignr$mem / $memmax$font
+${goto 10}${voffset 0}1: $color2${top_mem name 1}$alignr$color${top_mem mem_res 1}
+${goto 10}2: $color2${top_mem name 2}$alignr$color${top_mem mem_res 2}
+${goto 10}3: $color2${top_mem name 3}$alignr$color${top_mem mem_res 3}
+${goto 10}4: $color2${top_mem name 4}$alignr$color${top_mem mem_res 4}
+${goto 10}5: $color2${top_mem name 5}$alignr$color${top_mem mem_res 5}
+${goto 10}6: $color2${top_mem name 6}$alignr$color${top_mem mem_res 6}
+#
+############ Process ##############
+${voffset 2}${goto 0}${color red}PRO ${hr 1}${color}
+${voffset 0}${goto 10}1: $font$color2${top name 1}$alignr$color${top cpu 1}%
+${goto 10}2: $color2${top name 2}$alignr$color${top cpu 2}%
+${goto 10}3: $color2${top name 3}$alignr$color${top cpu 3}%
+${goto 10}4: $color2${top name 4}$alignr$color${top cpu 4}%
+${goto 10}5: $color2${top name 5}$alignr$color${top cpu 5}%
+${goto 10}6: $color2${top name 6}$alignr$color${top cpu 6}%
+#
+############ FileSystem ###########
+${voffset 2}${goto 0}${color red}File System ${hr 1}${color}
+${goto 10}$color2 Root:$alignr$color2${fs_used /} / ${fs_size /}
+${goto 10}${color} ${fs_used_perc /}% ${fs_bar /}
+${goto 10}$color2 Home:$alignr$color2${fs_used /home} / ${fs_size /home}
+${goto 10}${color} ${fs_used_perc /home} % $color2${fs_bar /home}
+#${goto 10}$color2 w2k $color2${fs_used /mnt/windows}/${fs_size /mnt/windows} $color2${fs_bar /mnt/windows}
+${goto 10}$color2 Swap:$alignr$color2${swap} / ${swapmax}
+${goto 10}${color} $swapperc % ${swapbar 8}
+#
+############ System ###############
+${voffset 2}${goto 0}${color red}System ${hr 1}${color}
+${voffset 2}${goto 10} ${execi 10000 awk -F= '/TION/ {print $2}' /etc/lsb-release |sed 's/"//g'} \
+$alignr${execi 10000 awk -F= '/EASE=/ {printf $2" "}   /NAME/ {print $2}' /etc/lsb-release}
+${goto 10}$color2 Kernel:${alignr}${kernel}
+${goto 10}$color2 USER:${alignr}${execi 1200 whoami}@${nodename}
+${goto 10}$color2 Uptime: ${alignr}${uptime_short}
+#
+############ MPD ##################
+#${voffset 5}${color2}MPD$alignr${if_mpd_playing} ${color}${mpd_artist} ${mpd_title}
+#${color}${mpd_bar 3 6}
+]]
