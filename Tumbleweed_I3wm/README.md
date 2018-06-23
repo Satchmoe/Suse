@@ -1,6 +1,4 @@
 # A I3wm Tumbleweed
-What it all looks like when all done...
-
 ## Must
 Must have KDE installed first with pulseaudio
 
@@ -12,5 +10,5 @@ Must have KDE installed first with pulseaudio
 5. conky
 6. OpenSuse_Kde_software.sh 'Change and add what you want and need'
 
-
+What it all looks like when all done...
 ![Tumbleweed pic](Sht1.png)
